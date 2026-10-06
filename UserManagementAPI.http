@@ -1,0 +1,38 @@
+@host = http://localhost:5000
+@token = secret-token-123
+
+### Get all users
+GET {{host}}/users
+Authorization: Bearer {{token}}
+
+### Get user by id
+GET {{host}}/users/1
+Authorization: Bearer {{token}}
+
+### Create user (valid)
+POST {{host}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Hamza Raza", "email": "hamza@example.com", "age": 25, "department": "Finance" }
+
+### Create user (invalid -> 400 validation errors)
+POST {{host}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "A", "email": "not-an-email", "age": 10, "department": "" }
+
+### Update user
+PUT {{host}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Ali Khan", "email": "ali@example.com", "age": 29, "department": "Engineering" }
+
+### Delete user
+DELETE {{host}}/users/2
+Authorization: Bearer {{token}}
+
+### No token -> 401
+GET {{host}}/users
